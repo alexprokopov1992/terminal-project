@@ -1,20 +1,27 @@
-﻿// terminal-project.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿#include <filesystem>
+#include <fstream>
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+using namespace std::filesystem;
+
+int main() {
+    path directorypath = "mydirectory";
+    if (!exists(directorypath)) {
+        create_directory(directorypath);
+        cout << "Directory created: " << directorypath << endl;
+    }
+
+    path filepath = directorypath / "my_file.txt";
+    ofstream file(filepath);
+    if (file.is_open()) {
+        file << "Hello, FileSystem!";
+        file.close();
+        cout << "File created: " << filepath << endl;
+    }
+    else {
+        cerr << "Failed to create file: " << filepath << endl;
+    }
+
+    return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
