@@ -1,31 +1,57 @@
 ﻿#include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <string.h>
+#include <vector>
+#include "resource.h"
 
 using namespace std;
 using namespace std::filesystem;
 
-void create_file_in_folder(std::string file_name, std::string folder_name, std::string text)
-{
-    path directorypath = folder_name;
-    if (!exists(directorypath)) {
-        create_directory(directorypath);
-        cout << "Directory created: " << directorypath << endl;
-    }
 
-    path filepath = directorypath / file_name;
-    ofstream file(filepath);
-    if (file.is_open()) {
-        file << text;
-        file.close();
-        cout << "File created: " << filepath << endl;
-    }
-    else {
-        cerr << "Failed to create file: " << filepath << endl;
-    }
-}
+vector <string> get_commands_vector(string &input);
+void execute_command(vector <string>&);
 
 int main() {
-    create_file_in_folder("1.txt", "test", "Good evening");
+    
+    string filepath = __FILE__;
+    int pos = filepath.length();
+    for (pos; pos >= 0; pos--)
+    {
+        if (filepath[pos] == '\\') break;
+    }
+    string location = "";
+    for (int i = 0; i < pos + 1; i++) location += filepath[i];
+    while (true)
+    {
+        string line;
+        cout << location;
+        getline(cin, line);
+        vector <string> commands = get_commands_vector(line);
+        execute_command(commands);
+        if (line == "exit") break;
+    }
     return 0;
+}
+
+vector <string> get_commands_vector(string& input)
+{
+    istringstream iss(input);
+    vector<string> words;
+    string word;
+    while (iss >> word) {
+        words.push_back(word);
+    }
+    return words;
+}
+
+void execute_command(vector <string>& commands_vector)
+{
+    if (commands_vector[0] == HELP_COMMAND) {
+        cout << "print help\n";
+        return;
+    }
+    else {
+        cout << "got unsupported command!\n";
+    }
 }
