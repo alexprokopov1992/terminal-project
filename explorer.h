@@ -24,5 +24,7 @@ public:
 	bool isWorking() { return Working; }
 private:
 	bool get_commands_vector(std::string line);
+	void printHelp();
+	void goUpDirectory();
 };
 

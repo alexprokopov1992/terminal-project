@@ -11,6 +11,7 @@ explorer::explorer()
 	location.pop_back();
 }
 
+//Function which return string of current explorer location
 std::string explorer::getCurrentLocation() 
 {
 	std::string current_location = "";
@@ -18,7 +19,7 @@ std::string explorer::getCurrentLocation()
 	{
 		current_location += element + "\\";
 	}
-	return current_location;
+	return current_location + " ";
 }
 
 void explorer::printCurrentLocation() {
@@ -44,14 +45,38 @@ void explorer::getCommand()
 	get_commands_vector(line);
 }
 
+void explorer::printHelp()
+{
+	cout << "Help contetnt there";
+}
+
+void explorer::goUpDirectory()
+{
+	if (location.size() > 1)
+	{
+		location.pop_back();
+	}
+	else {
+		cout << "Error! You are at upper directory!\n";
+	}
+}
+
+
 bool explorer::executeLastCommand()
 {
 	if (lastCommand[0] == TERMINATE_COMMAND) {
 		Working = false;
 		return true;
 	}
+
+	if (lastCommand[0] == UPPER_DIRECTORY_COMMAND) {
+		this->goUpDirectory();
+		return true;
+	}
+
+
 	if (lastCommand[0] == HELP_COMMAND) {
-		cout << "print help\n";
+		this->printHelp();
 		return true;
 	}
 	else {

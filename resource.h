@@ -2,5 +2,4 @@
 #define TERMINATE_COMMAND "exit"
 #define CHANGE_DIRECTORY_COMMAND "cd"
 #define UPPER_DIRECTORY_COMMAND "back"
-#define CREATE_FILE_COMMAND "cf"
-#define RENAME_FILE_COMMAND "renf"
+#define SHOW_FILES_AND_DIRS_COMMAND "dir"
