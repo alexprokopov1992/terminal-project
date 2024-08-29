@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include "explorer.h"
 #include "resource.h"
 
 using namespace std;
