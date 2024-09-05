@@ -29,7 +29,7 @@ private:
 	void printHelp();
 	void goUpDirectory();
 	void exit();
-	void doFile();
-	void doDir();
+	void createFile();
+	void showDirFiles();
 };
 

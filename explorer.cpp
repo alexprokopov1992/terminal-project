@@ -19,11 +19,11 @@ std::string explorer::getCurrentLocation()
 	{
 		current_location += element + "\\";
 	}
-	return current_location + " ";
+	return current_location;
 }
 
 void explorer::printCurrentLocation() {
-	cout << this->getCurrentLocation();
+	cout << this->getCurrentLocation() << " ";
 }
 
 bool explorer::get_commands_vector(std::string line)
@@ -65,7 +65,7 @@ void explorer::goUpDirectory()
 bool explorer::executeLastCommand()
 {
 	if (lastCommand[0] == TERMINATE_COMMAND) {
-		Working = false;
+		this->exit();
 		return true;
 	}
 
@@ -74,14 +74,18 @@ bool explorer::executeLastCommand()
 		return true;
 	}
 
+	if (lastCommand[0] == CREATE_NEW_FILE_COMMAND)
+	{
+		
+	}
 
 	if (lastCommand[0] == HELP_COMMAND) {
 		this->printHelp();
 		return true;
 	}
 
-	if (lastCommand[0] == OPEN_NEW_FILE_COMMAND) {
-		this->doFile();
+	if (lastCommand[0] == CREATE_NEW_FILE_COMMAND) {
+		this->createFile();
 		return true;
 	}
 
@@ -92,31 +96,40 @@ bool explorer::executeLastCommand()
 }
 
 void explorer::exit()
-{
-	if (lastCommand[0] == TERMINATE_COMMAND) 
-	{
-		
+{		
 		Working = false;
-
-	}
 }
-void explorer::doDir()
+
+void explorer::showDirFiles()
 {
-	while (true)
-	{
-		
-	}
+
 
 }
 
-void explorer::doFile()
+void explorer::createFile()
 {
-	if (lastCommand[0] == OPEN_NEW_FILE_COMMAND)
+	cout << "creating file\n";
+	
+	string file_path = getCurrentLocation() + lastCommand[1];
+
+	std::filesystem::path path{ file_path };
+
+	std::filesystem::create_directories(path.parent_path());
+	
+	std::ofstream ofs(path);
+
+	if (lastCommand.size() > 2)
 	{
-		string a;
-		cin >> a;
-		ifstream fin(a);
-		if (fin.is_open()) cout << "file created";
-		else cout << "file have not created , try again";	
+		for (int i = 2; i <= lastCommand.size() - 1; i++)
+		{
+			ofs << lastCommand[i] << " ";
+		}
 	}
+	else {
+		ofs << "This is default text\n";
+	}
+
+	ofs.close();
+	
+
 }
