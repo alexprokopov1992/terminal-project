@@ -3,3 +3,4 @@
 #define CHANGE_DIRECTORY_COMMAND "cd"
 #define UPPER_DIRECTORY_COMMAND "back"
 #define SHOW_FILES_AND_DIRS_COMMAND "dir"
+#define OPEN_NEW_FILE_COMMAND "createFile"

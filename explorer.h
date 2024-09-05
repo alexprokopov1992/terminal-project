@@ -4,7 +4,9 @@
 #include <filesystem>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include "resource.h"
+
 
 using namespace std;
 using namespace std::filesystem;
@@ -26,5 +28,8 @@ private:
 	bool get_commands_vector(std::string line);
 	void printHelp();
 	void goUpDirectory();
+	void exit();
+	void doFile();
+	void doDir();
 };
 

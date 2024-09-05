@@ -47,7 +47,7 @@ void explorer::getCommand()
 
 void explorer::printHelp()
 {
-	cout << "Help contetnt there";
+	cout << "Help contetnt there\n";//added \n
 }
 
 void explorer::goUpDirectory()
@@ -79,8 +79,44 @@ bool explorer::executeLastCommand()
 		this->printHelp();
 		return true;
 	}
+
+	if (lastCommand[0] == OPEN_NEW_FILE_COMMAND) {
+		this->doFile();
+		return true;
+	}
+
 	else {
-		cout << "got unsupported command!\n";
+		cout << " got unsupported command!\n";
 		return false;
+	}
+}
+
+void explorer::exit()
+{
+	if (lastCommand[0] == TERMINATE_COMMAND) 
+	{
+		
+		Working = false;
+
+	}
+}
+void explorer::doDir()
+{
+	while (true)
+	{
+		
+	}
+
+}
+
+void explorer::doFile()
+{
+	if (lastCommand[0] == OPEN_NEW_FILE_COMMAND)
+	{
+		string a;
+		cin >> a;
+		ifstream fin(a);
+		if (fin.is_open()) cout << "file created";
+		else cout << "file have not created , try again";	
 	}
 }
