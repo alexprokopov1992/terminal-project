@@ -69,6 +69,11 @@ bool explorer::executeLastCommand()
 		return true;
 	}
 
+	if (lastCommand[0] == SHOW_FILES_AND_DIRS_COMMAND) {
+		this->showDirFiles();
+		return true;
+	}
+
 	if (lastCommand[0] == UPPER_DIRECTORY_COMMAND) {
 		this->goUpDirectory();
 		return true;
@@ -102,7 +107,9 @@ void explorer::exit()
 
 void explorer::showDirFiles()
 {
-
+	std::string path = this->getCurrentLocation();
+	for (const auto& entry : filesystem::directory_iterator(path))
+		std::cout << entry.path().filename() << std::endl;
 
 }
 
