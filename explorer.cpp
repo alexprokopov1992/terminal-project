@@ -117,7 +117,7 @@ void explorer::createFile()
 {
 	cout << "creating file\n";
 	
-	string file_path = getCurrentLocation() + lastCommand[1];
+	string file_path = this->getCurrentLocation() + lastCommand[1];
 
 	std::filesystem::path path{ file_path };
 
