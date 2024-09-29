@@ -31,5 +31,6 @@ private:
 	void exit();
 	void createFile();
 	void showDirFiles();
+	void deleteFile();
 };
 

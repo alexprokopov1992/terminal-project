@@ -79,9 +79,10 @@ bool explorer::executeLastCommand()
 		return true;
 	}
 
-	if (lastCommand[0] == CREATE_NEW_FILE_COMMAND)
+	if (lastCommand[0] == DELETE_FILE_COMMAND)
 	{
-		
+		this->deleteFile();
+		return true;
 	}
 
 	if (lastCommand[0] == HELP_COMMAND) {
@@ -139,4 +140,20 @@ void explorer::createFile()
 	ofs.close();
 	
 
+}
+
+void explorer::deleteFile()
+{
+	string file_path = this->getCurrentLocation() + lastCommand[1];
+	try {
+		if (remove(file_path)) {
+			std::cout << "File (" << file_path << ") deleted successfully.\n";
+		}
+		else {
+			std::cout << "File (" << file_path << ") not exist.\n";
+		}
+	}
+	catch (const filesystem_error& e) {
+		std::cerr << "Got error deleting file: " << e.what() << '\n';
+	}
 }
