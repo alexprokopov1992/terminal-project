@@ -126,6 +126,11 @@ void explorer::createFile()
 
 	std::filesystem::path path{ file_path };
 
+	if (std::filesystem::exists(path)) {
+		cout << "Error: File " << lastCommand[1] << " already exists\n";
+		return;
+	}
+
 	std::filesystem::create_directories(path.parent_path());
 	
 	std::ofstream ofs(path);
@@ -142,7 +147,7 @@ void explorer::createFile()
 	}
 
 	ofs.close();
-	cout << "File" << lastCommand[1] << "created";
+	cout << "File " << lastCommand[1] << " created\n";
 
 }
 
