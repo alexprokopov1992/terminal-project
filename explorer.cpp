@@ -169,14 +169,14 @@ void explorer::deleteFile()
 
 void explorer::renameFile()
 {
-	string oldFilename = this->getCurrentLocation() + lastCommand[1];
-
+	string oldFilename =  lastCommand[1];
+	string fileLocation = this->getCurrentLocation() + oldFilename;
 	string newFilename = lastCommand[2];
 
 	try
 	{
 		// Rename the file
-		filesystem::rename(oldFilename, newFilename);
+		filesystem::rename(fileLocation, newFilename);
 		std::cout << "File renamed successfully!" << std::endl;
 	}
 	catch (const filesystem::filesystem_error& e) 
