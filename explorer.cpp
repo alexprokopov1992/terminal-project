@@ -84,7 +84,11 @@ bool explorer::executeLastCommand()
 		this->deleteFile();
 		return true;
 	}
-
+	if (lastCommand[0] == RENAME_FILE_COMMAND)
+	{
+		this->renameFile();
+		return true;
+	}
 	if (lastCommand[0] == HELP_COMMAND) {
 		this->printHelp();
 		return true;
@@ -138,7 +142,7 @@ void explorer::createFile()
 	}
 
 	ofs.close();
-	
+	cout << "File" << lastCommand[1] << "created";
 
 }
 
@@ -155,5 +159,24 @@ void explorer::deleteFile()
 	}
 	catch (const filesystem_error& e) {
 		std::cerr << "Got error deleting file: " << e.what() << '\n';
+	}
+}
+
+void explorer::renameFile()
+{
+	namespace fs = std::filesystem;
+
+	fs::path oldFilename = 
+	fs::path newFilename = newFileName;
+
+	try
+	{
+		// Rename the file
+		fs::rename(oldFilename, newFilename);
+		std::cout << "File renamed successfully!" << std::endl;
+	}
+	catch (const fs::filesystem_error& e) 
+	{
+		std::cerr << "Error renaming file: " << e.what() << std::endl;
 	}
 }

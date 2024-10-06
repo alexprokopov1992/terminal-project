@@ -5,3 +5,4 @@
 #define SHOW_FILES_AND_DIRS_COMMAND "dir"
 #define CREATE_NEW_FILE_COMMAND "cf"
 #define DELETE_FILE_COMMAND "df"
+#define RENAME_FILE_COMMAND "rf"

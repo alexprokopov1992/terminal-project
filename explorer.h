@@ -32,5 +32,6 @@ private:
 	void createFile();
 	void showDirFiles();
 	void deleteFile();
+	void renameFile(string , string);
 };
 
