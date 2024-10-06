@@ -164,18 +164,17 @@ void explorer::deleteFile()
 
 void explorer::renameFile()
 {
-	namespace fs = std::filesystem;
+	string oldFilename = this->getCurrentLocation() + lastCommand[1];
 
-	fs::path oldFilename = 
-	fs::path newFilename = newFileName;
+	string newFilename = lastCommand[2];
 
 	try
 	{
 		// Rename the file
-		fs::rename(oldFilename, newFilename);
+		filesystem::rename(oldFilename, newFilename);
 		std::cout << "File renamed successfully!" << std::endl;
 	}
-	catch (const fs::filesystem_error& e) 
+	catch (const filesystem::filesystem_error& e) 
 	{
 		std::cerr << "Error renaming file: " << e.what() << std::endl;
 	}
