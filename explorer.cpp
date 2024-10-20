@@ -99,6 +99,13 @@ bool explorer::executeLastCommand()
 		return true;
 	}
 
+	if (lastCommand[0] == CREATE_DIRECTORY_COMMAND) {
+		this->createFolder();
+		return true;
+	}
+
+
+
 	else {
 		cout << " got unsupported command!\n";
 		return false;
@@ -184,3 +191,36 @@ void explorer::renameFile()
 		std::cerr << "Error renaming file: " << e.what() << std::endl;
 	}
 }
+
+void explorer::createFolder() 
+{
+	std::string folderName = lastCommand[1];
+
+	if (std::filesystem::create_directory(folderName))
+	{
+		std::cout << "Folder created : " << folderName << std::endl;
+		
+	}
+	else 
+	{
+		std::cout << "folder did not create /err/ " << std::endl;
+	}
+
+}
+
+void explorer::openFolder() 
+{
+	std::string folderPath = getCurrentLocation() + lastCommand[1];
+
+	if (exists(folderPath) && is_directory(folderPath))
+ {
+		std::cout << "Folder exists, opening...\n";
+		ShellExecute(0, "open", folderPath.c_str(), 0, 0, SW_SHOWNORMAL);
+	}
+	else 
+	{
+		std::cerr << "Folder does not exist.\n";
+	}
+
+}
+

@@ -6,3 +6,5 @@
 #define CREATE_NEW_FILE_COMMAND "cf"
 #define DELETE_FILE_COMMAND "df"
 #define RENAME_FILE_COMMAND "rf"
+#define CREATE_DIRECTORY_COMMAND "createFolder"
+#define OPEN_DIRECTORY_COMMAND "openFolder"

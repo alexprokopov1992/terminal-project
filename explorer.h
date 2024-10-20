@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include "resource.h"
+#include <windows.h>
 
 
 using namespace std;
@@ -33,5 +34,7 @@ private:
 	void showDirFiles();
 	void deleteFile();
 	void renameFile();
+	void createFolder();
+	void openFolder();
 };
 
